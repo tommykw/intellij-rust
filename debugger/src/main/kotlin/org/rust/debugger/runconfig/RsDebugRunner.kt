@@ -146,6 +146,7 @@ private fun buildProjectAndGetBinaryArtifactPath(project: Project, command: Carg
                             .mapNotNull { CargoMetadata.Artifact.fromJson(it) }
                             .filter { (target, profile) ->
                                 target.cleanKind == CargoWorkspace.TargetKind.BIN
+                                    || target.cleanKind == CargoWorkspace.TargetKind.EXAMPLE
                                     || target.cleanKind == CargoWorkspace.TargetKind.TEST
                                     || (target.cleanKind == CargoWorkspace.TargetKind.LIB && profile.test)
                             }
@@ -161,7 +162,7 @@ private fun buildProjectAndGetBinaryArtifactPath(project: Project, command: Carg
                             }
                             binaries.size > 1 -> {
                                 project.showErrorDialog("More than one binary produced. " +
-                                    "Please specify `--bin`, `--lib` or `--test` flag explicitly.")
+                                    "Please specify `--bin`, `--lib`, `--test` or `--example` flag explicitly.")
                                 promise.setResult(null)
                             }
                             else -> promise.setResult(Binary(Paths.get(binaries.single())))

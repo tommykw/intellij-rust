@@ -148,6 +148,7 @@ change. Common tags are:
   * PERF for performance optimizations
   * PRJ for project creation changes 
   * ACT for actions
+  * DBG for debugger
 
 
   * CARGO for cargo-related changes
